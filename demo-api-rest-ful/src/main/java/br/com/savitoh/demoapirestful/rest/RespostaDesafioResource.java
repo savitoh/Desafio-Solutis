@@ -1,5 +1,6 @@
 package br.com.savitoh.demoapirestful.rest;
 
+import br.com.savitoh.demoapirestful.model.Requisicao;
 import br.com.savitoh.demoapirestful.model.RespostaDesafio;
 import br.com.savitoh.demoapirestful.service.RespostaDesafioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping({"/api/v1"})
+@RequestMapping({"/api/v1/desafio-solutis"})
 public class RespostaDesafioResource {
 
     private RespostaDesafioService respostaDesafioService;
@@ -24,8 +25,8 @@ public class RespostaDesafioResource {
     }
 
     @PostMapping
-    public ResponseEntity<RespostaDesafio> criaResponse(@Valid @RequestBody RespostaDesafio respostaDesafio) {
-        RespostaDesafio createdRespostaDesafio = respostaDesafioService.save(respostaDesafio);
+    public ResponseEntity<RespostaDesafio> criaResponse(@Valid @RequestBody Requisicao requisicao) {
+        RespostaDesafio createdRespostaDesafio = respostaDesafioService.save(requisicao);
         return new ResponseEntity<>(createdRespostaDesafio, HttpStatus.CREATED);
     }
 }

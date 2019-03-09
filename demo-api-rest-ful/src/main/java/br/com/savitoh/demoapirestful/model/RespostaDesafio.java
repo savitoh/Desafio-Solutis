@@ -21,7 +21,7 @@ public class RespostaDesafio {
     @Pattern(regexp = "[a-zA-Z]+")
     private String palavra;
 
-    private char vogal;
+    private Character vogal;
 
     @NotBlank
     private String tempoTotal;

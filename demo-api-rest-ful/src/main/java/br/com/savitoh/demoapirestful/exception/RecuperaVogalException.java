@@ -2,7 +2,9 @@ package br.com.savitoh.demoapirestful.exception;
 
 public class RecuperaVogalException extends Exception {
 
-    public  RecuperaVogalException(String msgError){
-        super(msgError);
+    private static final String MSG_ERROR = "Não foi possivel recuperar vogal com as regras pedidas (:";
+
+    public  RecuperaVogalException(){
+        super(MSG_ERROR);
     }
 }
