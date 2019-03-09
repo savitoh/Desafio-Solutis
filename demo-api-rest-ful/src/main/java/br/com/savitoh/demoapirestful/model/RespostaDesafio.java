@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Data
-public class Response {
+public class RespostaDesafio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
