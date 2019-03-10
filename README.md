@@ -3,16 +3,17 @@
 Projeto composto de API restfull e um client para avaliação de conhecimento. Utilizando a seguinte stack: 
 
   - Java 8
-  - Spring Boot 2.1.3.RELEASE
+  - Spring Boot v2.1.3.RELEASE
   - Spring Data
-  - Angular 5
+  - Angular 6
 
 ### Tecnologias Necessárias
 
 Abaixo segue a lista de tecnologias nescessárias para rodar o projeto.
 
 * JDK 8 
-* Maven 3.5+
+* Maven v3.5+
+* Node.js v8+
 
 ### Run Project
 
@@ -25,6 +26,18 @@ Digite os seguinte comando através do terminal/cmd, acessando o diretório raiz
 $ mvn clean install
 $ mvn spring-boot:run
 ```
+
+#### Run Client
+
+Digite os seguinte comando através do terminal/cmd, acessando o diretório raiz do projeto do cliente em Angular: client-app.
+```sh
+$ npm install
+$ ng serve
+```
+
+Agora acesse o projeto pelo seguinte link: http://localhost:4200
+
+
 
 
 

@@ -1,0 +1,17 @@
+html,
+body{
+ height: 100%;
+}
+
+#app {
+  background: #222 center center no-repeat;
+  background-size: cover;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+#app-caption {
+  width: 100%;
+}
