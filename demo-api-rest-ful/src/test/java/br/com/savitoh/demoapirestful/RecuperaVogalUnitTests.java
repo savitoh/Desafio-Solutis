@@ -35,6 +35,7 @@ public class RecuperaVogalUnitTests {
         vogal = recuperaVogalImpl.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal("aaaa");
     }
 
+
     @Test
     public void deveCalcularTempoProcessamento() throws RecuperaVogalException {
         recuperaVogalImpl.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal("aAbBABacafe");

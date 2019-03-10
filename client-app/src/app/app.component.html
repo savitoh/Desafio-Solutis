@@ -3,14 +3,33 @@
       <div id="container" class="container">
           <div class="row text-white">
               <div class="col-sm-6 offset-sm-3 text-center">
-                  <h1 class="display-4">Desafio Solutis</h1>
+                  <h1 class="display-4">{{title}}</h1>
                   <div class="info-form">
-                      <form class="form-inlin justify-content-center">
+                      <form [formGroup]="form" class="form-inlin justify-content-center">
                           <div class="form-group">
                               <label class="sr-only">Name</label>
-                              <input type="text" class="form-control" placeholder="Palavra">
+                              <input type="text" [(ngModel)]="requisicao.palavra" class="form-control" 
+                                     placeholder="Palavra" name="palavra" id="palavra"
+                                     formControlName="palavra" (keydown)="MACAddressInput($event)"
+                                     >
                           </div>
-                          <button type="submit" class="btn btn-success ">Enviar!</button>
+                          <div class="form-group" *ngIf=" isShowTable">
+                               <table class="table table-sm table-light">
+                                   <thead class="table-light">
+                                       <th scope="col">Vogal</th>
+                                       <th scope="col">Tempo Processamento</th>
+                                   </thead>
+                                   <tbody>
+                                       <tr>
+                                           <td>{{respostaDesafio.vogal}}</td>
+                                           <td>{{respostaDesafio.tempoTotal}}</td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                          </div>
+                          <button (click)="recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal()" 
+                                   class="btn btn-success" [disabled]="form.invalid">Enviar!
+                          </button>
                       </form>
                   </div>
               </div>

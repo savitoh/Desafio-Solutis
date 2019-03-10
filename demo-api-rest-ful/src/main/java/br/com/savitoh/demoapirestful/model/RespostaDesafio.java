@@ -23,7 +23,6 @@ public class RespostaDesafio {
 
     private Character vogal;
 
-    @NotBlank
     private String tempoTotal;
 
     private String messagem;

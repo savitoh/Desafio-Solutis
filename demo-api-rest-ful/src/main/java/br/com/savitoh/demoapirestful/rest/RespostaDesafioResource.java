@@ -6,12 +6,10 @@ import br.com.savitoh.demoapirestful.service.RespostaDesafioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.logging.Logger;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -20,6 +18,8 @@ public class RespostaDesafioResource {
 
     private RespostaDesafioService respostaDesafioService;
 
+    private final Logger LOGGER = Logger.getLogger(RespostaDesafio.class.getName());
+
     @Autowired
     public void setRespostaDesafioService(RespostaDesafioService respostaDesafioService) {
         this.respostaDesafioService = respostaDesafioService;
@@ -27,6 +27,7 @@ public class RespostaDesafioResource {
 
     @PostMapping
     public ResponseEntity<RespostaDesafio> criaResponse(@Valid @RequestBody Requisicao requisicao) {
+        LOGGER.info("Requisicao " + requisicao);
         RespostaDesafio createdRespostaDesafio = respostaDesafioService.save(requisicao);
         return new ResponseEntity<>(createdRespostaDesafio, HttpStatus.CREATED);
     }
