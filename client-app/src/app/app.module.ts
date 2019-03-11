@@ -5,10 +5,12 @@ import { ConfigService } from './service/config.service';
 import { RespostaDesafioService } from './service/resposta-desafio.service';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { RespostaDesafioComponent } from './resposta-desafio/resposta-desafio.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RespostaDesafioComponent
   ],
   imports: [
     HttpClientModule,
