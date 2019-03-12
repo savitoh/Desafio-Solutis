@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class Requisicao {
 	
-	@NotBlank
+	@NotBlank(message = "{NotBlank.requisicao.message}")
 	@Pattern(regexp = "[a-zA-Z]+", message = "{Pattern.requisicao.palavra}")
 	private String palavra;
 
