@@ -32,6 +32,7 @@ $ mvn spring-boot:run
 Digite os seguinte comando através do terminal/cmd, acessando o diretório raiz do projeto do cliente em Angular: client-app.
 ```sh
 $ npm install
+$ ng build
 $ ng serve
 ```
 
