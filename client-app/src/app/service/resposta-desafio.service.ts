@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { Headers} from '@angular/http';
 import { RequestOptions } from '@angular/http';
 
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
-
 import { ConfigService } from './config.service';
 import { Requisicao } from '../models/Requisicao';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

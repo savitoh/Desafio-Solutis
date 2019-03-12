@@ -3,6 +3,7 @@ import { Requisicao } from '../models/Requisicao';
 import { RespostaDesafioService } from '../service/resposta-desafio.service';
 import { RespostaDesafio } from '../models/RespostaDesafio';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import UtilsForms from '../utils/utils.forms';
 
 @Component({
   selector: 'app-resposta-desafio',
@@ -17,7 +18,7 @@ export class RespostaDesafioComponent implements OnInit {
   private form: FormGroup;
   private isShowTable = false;
 
-  constructor(private repostaDesafio: RespostaDesafioService,
+  constructor(private repostaDesafioService: RespostaDesafioService,
               private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class RespostaDesafioComponent implements OnInit {
 
   recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(): void {
     this.isShowTable = false;
-    this.repostaDesafio.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(this.requisicao).subscribe(response => {
+    this.repostaDesafioService.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(this.requisicao).subscribe(response => {
        console.log('Response: ', response);
        this.respostaDesafio = response;
        this.exibeTabelaCasoRecupereVogal();
@@ -52,12 +53,8 @@ export class RespostaDesafioComponent implements OnInit {
     }
   }
 
-  private MACAddressInput(e): void {
-    const code = e.key.charCodeAt(0);
-    if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)) {} else {
-      e.preventDefault();
-      return;
-    }
+  private MACAddressInput(e: KeyboardEvent): void {
+    UtilsForms.permitirApenasLetras(e);
   }
 
 }
