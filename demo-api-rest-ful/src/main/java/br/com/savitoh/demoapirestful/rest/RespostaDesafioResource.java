@@ -1,5 +1,6 @@
 package br.com.savitoh.demoapirestful.rest;
 
+import br.com.savitoh.demoapirestful.dto.RespostaDesafioDTO;
 import br.com.savitoh.demoapirestful.model.Requisicao;
 import br.com.savitoh.demoapirestful.model.RespostaDesafio;
 import br.com.savitoh.demoapirestful.service.RespostaDesafioService;
@@ -26,9 +27,10 @@ public class RespostaDesafioResource {
     }
 
     @PostMapping
-    public ResponseEntity<RespostaDesafio> criaResponse(@Valid @RequestBody Requisicao requisicao) {
+    public ResponseEntity<RespostaDesafioDTO> criaResponse(@Valid @RequestBody Requisicao requisicao) {
         LOGGER.info("Requisicao " + requisicao);
         RespostaDesafio createdRespostaDesafio = respostaDesafioService.save(requisicao);
-        return new ResponseEntity<>(createdRespostaDesafio, HttpStatus.CREATED);
+        RespostaDesafioDTO respostaDesafioDTO = RespostaDesafioDTO.transformaRespostaDesafioEmDTO(createdRespostaDesafio);
+        return new ResponseEntity<>(respostaDesafioDTO, HttpStatus.CREATED);
     }
 }

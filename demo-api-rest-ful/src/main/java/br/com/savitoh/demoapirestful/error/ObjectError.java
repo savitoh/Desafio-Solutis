@@ -1,7 +1,9 @@
 package br.com.savitoh.demoapirestful.error;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor
 public class ObjectError {
 
