@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Requisicao } from '../models/Requisicao';
 import { RespostaDesafioService } from '../service/resposta-desafio.service';
 import { RespostaDesafio } from '../models/RespostaDesafio';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import UtilsForms from '../utils/utils.forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-resposta-desafio',
@@ -17,6 +17,8 @@ export class RespostaDesafioComponent implements OnInit {
   private respostaDesafio: RespostaDesafio;
   private form: FormGroup;
   private isShowTable = false;
+  private apenasLetrasPatterns = new RegExp('^[a-zA-Z]+$');
+
 
   constructor(private repostaDesafioService: RespostaDesafioService,
               private fb: FormBuilder) { }
@@ -28,7 +30,7 @@ export class RespostaDesafioComponent implements OnInit {
 
   private initValidationForm(): void {
     this.form = this.fb.group({
-      palavra: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]]
+      palavra: ['', [Validators.required, Validators.pattern(this.apenasLetrasPatterns)]]
     });
   }
 
@@ -54,7 +56,7 @@ export class RespostaDesafioComponent implements OnInit {
   }
 
   private MACAddressInput(e: KeyboardEvent): void {
-    UtilsForms.permitirApenasLetras(e);
+    // UtilsForms.permitirApenasLetras(e);
   }
 
 }

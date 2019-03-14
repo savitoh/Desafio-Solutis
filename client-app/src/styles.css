@@ -15,3 +15,9 @@ body{
 #app-caption {
   width: 100%;
 }
+
+.error-msg {
+  color: red;
+  display: block;
+  bottom: -4em;
+}
