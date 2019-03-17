@@ -1,9 +1,11 @@
 package br.com.savitoh.demoapirestful.dto;
 
 import br.com.savitoh.demoapirestful.model.RespostaDesafio;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
