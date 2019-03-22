@@ -4,17 +4,19 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
 public class RespostaDesafio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator =  "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
 
     @NotBlank
