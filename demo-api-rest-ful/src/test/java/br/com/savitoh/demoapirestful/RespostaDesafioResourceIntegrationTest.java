@@ -2,7 +2,7 @@ package br.com.savitoh.demoapirestful;
 
 import br.com.savitoh.demoapirestful.dto.RespostaDesafioDTO;
 import br.com.savitoh.demoapirestful.error.ErrorResponse;
-import br.com.savitoh.demoapirestful.model.Requisicao;
+import br.com.savitoh.demoapirestful.dto.RequisicaoDTO;
 
 import java.net.URISyntaxException;
 
@@ -34,7 +34,7 @@ public class RespostaDesafioResourceIntegrationTest {
 
     private HttpHeaders headers;
 
-    private Requisicao requisicao;
+    private RequisicaoDTO requisicaoDTO;
 
     private final String basseURL = "http://localhost:" + port + "/api/v1/desafio-solutis";
 
@@ -42,21 +42,20 @@ public class RespostaDesafioResourceIntegrationTest {
     public void init() throws URISyntaxException {
         testRestTemplate = new TestRestTemplate();
         headers = new HttpHeaders();
-        requisicao = new Requisicao();
+        requisicaoDTO = new RequisicaoDTO();
     }
 
 
     @Test
     public void deveCriarRespostaDesavioComVogal() {
 
-        requisicao.setPalavra("aAbBABacafe");
+        requisicaoDTO.setPalavra("aAbBABacafe");
 
-        HttpEntity<Requisicao> request = new HttpEntity<Requisicao>(requisicao, headers);
+        final var request = new HttpEntity<RequisicaoDTO>(requisicaoDTO, headers);
 
-        ResponseEntity<RespostaDesafioDTO> response = testRestTemplate.postForEntity(basseURL, request,
-                                                                                     RespostaDesafioDTO.class);
+        final var response = testRestTemplate.postForEntity(basseURL, request, RespostaDesafioDTO.class);
 
-        RespostaDesafioDTO respostaDesafioDTO = response.getBody();
+        final var respostaDesafioDTO = response.getBody();
 
         Assert.assertEquals(201, response.getStatusCodeValue());
         Assert.assertEquals(Character.valueOf('e'), respostaDesafioDTO.getVogal());
@@ -66,32 +65,31 @@ public class RespostaDesafioResourceIntegrationTest {
     @Test
     public void deveCriarRespostaDesavioSemVogal() {
 
-        requisicao.setPalavra("rr");
+        requisicaoDTO.setPalavra("rr");
 
-        HttpEntity<Requisicao> request = new HttpEntity<Requisicao>(requisicao, headers);
+        final var request = new HttpEntity<RequisicaoDTO>(requisicaoDTO, headers);
 
-        ResponseEntity<RespostaDesafioDTO> response = testRestTemplate.postForEntity(basseURL, request,
-                                                                                     RespostaDesafioDTO.class);
+        final var response = testRestTemplate.postForEntity(basseURL, request, RespostaDesafioDTO.class);
 
-        RespostaDesafioDTO respostaDesafioDTO = response.getBody();
+        final var respostaDesafioDTO = response.getBody();
 
         Assert.assertEquals(201, response.getStatusCodeValue());
         Assert.assertNull(respostaDesafioDTO.getVogal());
-        Assert.assertEquals("Não foi possivel recuperar vogal com as regras pedidas (:", respostaDesafioDTO.getMessagem());
+        Assert.assertEquals("Não foi possivel recuperar vogal com as regras pedidas (:",
+                            respostaDesafioDTO.getMessagem());
     }
 
 
     @Test
     public void deveFalharRequisicao() throws RestClientException {
 
-        requisicao.setPalavra("rr1");
+        requisicaoDTO.setPalavra("rr1");
 
-        HttpEntity<Requisicao> request = new HttpEntity<Requisicao>(requisicao, headers);
+        final var request = new HttpEntity<RequisicaoDTO>(requisicaoDTO, headers);
 
-        ResponseEntity<ErrorResponse> response = testRestTemplate.postForEntity(basseURL, request,
-                                                                                ErrorResponse.class);
+        final var response = testRestTemplate.postForEntity(basseURL, request, ErrorResponse.class);
 
-        ErrorResponse errorResponse = response.getBody();
+        final var errorResponse = response.getBody();
 
         Assert.assertEquals(400, response.getStatusCodeValue());
         Assert.assertNotNull(errorResponse);

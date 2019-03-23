@@ -6,10 +6,9 @@ import java.util.Optional;
 
 public interface RecuperaVogal {
 
-    Optional<Character> recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(String palavra)
+    Optional<Character> recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(final String palavra)
             throws RecuperaVogalException;
 
     String getTempoProcessamento();
-
 
 }

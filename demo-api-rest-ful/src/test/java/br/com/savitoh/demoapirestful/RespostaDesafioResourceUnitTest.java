@@ -3,7 +3,7 @@ package br.com.savitoh.demoapirestful;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import br.com.savitoh.demoapirestful.model.Requisicao;
+import br.com.savitoh.demoapirestful.dto.RequisicaoDTO;
 import br.com.savitoh.demoapirestful.model.RespostaDesafio;
 import br.com.savitoh.demoapirestful.rest.RespostaDesafioResource;
 import br.com.savitoh.demoapirestful.service.RespostaDesafioService;
@@ -34,28 +34,28 @@ public class RespostaDesafioResourceUnitTest {
     @MockBean
     private RespostaDesafioService respostaDesafioServiceMock;
 
-    private Requisicao requisicao;
+    private RequisicaoDTO requisicaoDTO;
 
     @Before
     public void init () {
-        requisicao = new Requisicao();
+        requisicaoDTO = new RequisicaoDTO();
     }
 
     @Test
     public void deveCriarRespostaDesafioComVogal() throws Exception {
 
-        RespostaDesafio respostaDesafioMock = new RespostaDesafio();
+        final var respostaDesafioMock = new RespostaDesafio();
         respostaDesafioMock.setId(1L);
         respostaDesafioMock.setPalavra("aAbBABacafe");
         respostaDesafioMock.setVogal('e');
         respostaDesafioMock.setMessagem("");
         respostaDesafioMock.setTempoTotal("10ms");
 
-        requisicao.setPalavra("aAbBABacafe");
+        requisicaoDTO.setPalavra("aAbBABacafe");
 
-        String requisicaoJson = JsonUtil.mapToJson(requisicao);
+        final var requisicaoJson = JsonUtil.mapToJson(requisicaoDTO);
 
-        Mockito.when(respostaDesafioServiceMock.save(Mockito.any(Requisicao.class)))
+        Mockito.when(respostaDesafioServiceMock.save(Mockito.any(RequisicaoDTO.class)))
                 .thenReturn(respostaDesafioMock);
 
         MvcResult mvcResult = mvcMock.perform(post("/api/v1/desafio-solutis")
@@ -63,10 +63,10 @@ public class RespostaDesafioResourceUnitTest {
                                       .contentType("application/json"))
                                       .andReturn();
 
-        MockHttpServletResponse response = mvcResult.getResponse(); 
-        String responseBody = response.getContentAsString();
+        final var response = mvcResult.getResponse();
+        final var responseBody = response.getContentAsString();
 
-        final String vogal = "\"vogal\":\"e\"";
+        final var vogal = "\"vogal\":\"e\"";
 
         Assert.assertEquals(201, response.getStatus());
         Assert.assertTrue(responseBody.contains(vogal));
@@ -75,17 +75,17 @@ public class RespostaDesafioResourceUnitTest {
     @Test
     public void deveCriarRespostaDesafioSemVogal() throws Exception {
 
-        RespostaDesafio respostaDesafioMock = new RespostaDesafio();
+        final var respostaDesafioMock = new RespostaDesafio();
         respostaDesafioMock.setId(1L);
         respostaDesafioMock.setPalavra("aAb");
         respostaDesafioMock.setMessagem("Não foi possivel recuperar vogal com as regras pedidas (:");
         respostaDesafioMock.setTempoTotal("10ms");
 
-        requisicao.setPalavra("aAbBABacafe");
+        requisicaoDTO.setPalavra("aAbBABacafe");
 
-        String requisicaoJson = JsonUtil.mapToJson(requisicao);
+        final var requisicaoJson = JsonUtil.mapToJson(requisicaoDTO);
 
-        Mockito.when(respostaDesafioServiceMock.save(Mockito.any(Requisicao.class)))
+        Mockito.when(respostaDesafioServiceMock.save(Mockito.any(RequisicaoDTO.class)))
                 .thenReturn(respostaDesafioMock);
 
         MvcResult mvcResult = mvcMock.perform(post("/api/v1/desafio-solutis")
@@ -93,10 +93,10 @@ public class RespostaDesafioResourceUnitTest {
                                       .contentType("application/json"))
                                       .andReturn();
 
-        MockHttpServletResponse response = mvcResult.getResponse(); 
-        String responseBody = response.getContentAsString();
+        final var response = mvcResult.getResponse();
+        final var responseBody = response.getContentAsString();
 
-        final String mensagem = "\"messagem\":\"Não foi possivel recuperar vogal com as regras pedidas (:\"";
+        final var mensagem = "\"messagem\":\"Não foi possivel recuperar vogal com as regras pedidas (:\"";
 
         Assert.assertEquals(201, response.getStatus());
         Assert.assertTrue(responseBody.contains(mensagem));
@@ -107,9 +107,9 @@ public class RespostaDesafioResourceUnitTest {
     @Test
     public void deveRetornarStatus400_QuandoCampoPalavraNaoPossuirApenasLetras() throws Exception {
 
-        requisicao.setPalavra("22rrt");
+        requisicaoDTO.setPalavra("22rrt");
 
-        String requisicaoJson = JsonUtil.mapToJson(requisicao);
+        final var requisicaoJson = JsonUtil.mapToJson(requisicaoDTO);
 
         mvcMock.perform(post("/api/v1/desafio-solutis")
                 .accept("application/json").content(requisicaoJson)

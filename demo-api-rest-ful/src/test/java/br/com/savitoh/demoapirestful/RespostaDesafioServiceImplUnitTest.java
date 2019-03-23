@@ -2,7 +2,7 @@ package br.com.savitoh.demoapirestful;
 
 import br.com.savitoh.demoapirestful.businesslogic.RecuperaVogal;
 import br.com.savitoh.demoapirestful.exception.RecuperaVogalException;
-import br.com.savitoh.demoapirestful.model.Requisicao;
+import br.com.savitoh.demoapirestful.dto.RequisicaoDTO;
 import br.com.savitoh.demoapirestful.model.RespostaDesafio;
 import br.com.savitoh.demoapirestful.repository.RespostaDesafioRepository;
 import br.com.savitoh.demoapirestful.serviceimpl.RespostaDesafioServiceImpl;
@@ -43,25 +43,24 @@ public class RespostaDesafioServiceImplUnitTest {
 
     @Test
     public void deveCriarRespostaDesafioSemVogal() throws RecuperaVogalException {
-        String palavraTest = "rr";
-        Requisicao requisicao = new Requisicao(palavraTest);
+        final var palavraTest = "rr";
+        final var requisicaoDTO = new RequisicaoDTO(palavraTest);
         Mockito.when(recuperaVogalMock.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(palavraTest))
                 .thenThrow(RecuperaVogalException.class);
 
-        RespostaDesafio respostaDesafio = respostaDesafioServiceImpl.save(requisicao);
+        RespostaDesafio respostaDesafio = respostaDesafioServiceImpl.save(requisicaoDTO);
         Assert.assertEquals("Não foi possivel recuperar vogal com as regras pedidas (:", 
                             respostaDesafio.getMessagem());
     }
 
     @Test
     public void deveCriarRepotaDesafioComVogal() throws RecuperaVogalException {
-
-        String palavraTest = "aAbBABacafe";
-        Requisicao requisicao = new Requisicao(palavraTest);
+        final var palavraTest = "aAbBABacafe";
+        final var requisicaoDTO = new RequisicaoDTO(palavraTest);
         Mockito.when(recuperaVogalMock.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(palavraTest))
                 .thenReturn(Optional.of('e'));
 
-        RespostaDesafio respostaDesafio = respostaDesafioServiceImpl.save(requisicao);
+        RespostaDesafio respostaDesafio = respostaDesafioServiceImpl.save(requisicaoDTO);
         Assert.assertSame('e', respostaDesafio.getVogal());
     }
 }

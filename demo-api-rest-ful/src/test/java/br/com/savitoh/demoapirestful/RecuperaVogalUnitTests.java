@@ -24,22 +24,22 @@ public class RecuperaVogalUnitTests {
 
     @Test
     public void deveRetornarVogal() throws RecuperaVogalException {
-        Optional<Character> vogal;
-        vogal = recuperaVogalImpl.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal("aAbBABacafe");
+        final var vogal = recuperaVogalImpl
+                                .recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal("aAbBABacafe");
         Assert.assertEquals(vogal.get().charValue(), 'e');
     }
 
     @Test(expected = RecuperaVogalException.class)
     public void deveLancarExceptionRecuperaVogal() throws RecuperaVogalException{
-        Optional<Character> vogal;
-        vogal = recuperaVogalImpl.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal("aaaa");
+        final var vogal = recuperaVogalImpl
+                                    .recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal("aaaa");
     }
 
 
     @Test
     public void deveCalcularTempoProcessamento() throws RecuperaVogalException {
         recuperaVogalImpl.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal("aAbBABacafe");
-        String tempoProcessamento = recuperaVogalImpl.getTempoProcessamento();
+        final var tempoProcessamento = recuperaVogalImpl.getTempoProcessamento();
         Assert.assertNotNull(tempoProcessamento);
     }
 

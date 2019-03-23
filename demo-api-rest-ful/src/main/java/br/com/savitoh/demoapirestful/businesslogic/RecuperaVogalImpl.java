@@ -16,11 +16,12 @@ public class RecuperaVogalImpl implements RecuperaVogal {
     private long timeElapsed;
 
     @Override
-    public Optional<Character> recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(String palavra)
+    public Optional<Character> recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(final String palavra)
             throws RecuperaVogalException {
-        Instant start = Instant.now();
 
-        char [] array = palavra.toCharArray();
+        final var start = Instant.now();
+
+        var array = palavra.toCharArray();
         Optional<Character> vogal = Optional.empty();
         for(int i=0; i<array.length; i++) {
             if(isVogal(array[i]) && naoUtrapassouArray(array.length, i)) {
@@ -34,8 +35,8 @@ public class RecuperaVogalImpl implements RecuperaVogal {
             }
         }
 
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).toMillis();
+        final var finish = Instant.now();
+        timeElapsed = Duration.between(start, finish).toMillis();
 
         if(! vogal.isPresent()) {
             throw new RecuperaVogalException();
@@ -52,14 +53,14 @@ public class RecuperaVogalImpl implements RecuperaVogal {
         return (index+1 < tamanhoArray) ? true : false;
     }
 
-    private boolean vogalNaoRepetida(String palavra, char character) {
-        Long countVezesRepetida = palavra.chars().filter(c -> c == character).count();
-        boolean isVogal = isVogal(character);
+    private boolean vogalNaoRepetida(final String palavra, final char character) {
+        final var countVezesRepetida = palavra.chars().filter(c -> c == character).count();
+        final var isVogal = isVogal(character);
         return (countVezesRepetida == 1L && isVogal) ? true : false;
     }
 
-    private boolean isVogal(char character) {
-        final List<String> vogais = Arrays.asList("a", "e", "i", "o", "u");
+    private boolean isVogal(final char character) {
+        final var vogais = Arrays.asList("a", "e", "i", "o", "u");
         return vogais.stream()
                       .anyMatch(v -> v.equalsIgnoreCase(String.valueOf(character)));
     }

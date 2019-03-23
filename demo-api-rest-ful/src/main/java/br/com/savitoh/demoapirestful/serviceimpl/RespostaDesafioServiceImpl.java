@@ -2,15 +2,13 @@ package br.com.savitoh.demoapirestful.serviceimpl;
 
 import br.com.savitoh.demoapirestful.businesslogic.RecuperaVogal;
 import br.com.savitoh.demoapirestful.exception.RecuperaVogalException;
-import br.com.savitoh.demoapirestful.model.Requisicao;
+import br.com.savitoh.demoapirestful.dto.RequisicaoDTO;
 import br.com.savitoh.demoapirestful.model.RespostaDesafio;
 import br.com.savitoh.demoapirestful.repository.RespostaDesafioRepository;
 import br.com.savitoh.demoapirestful.service.RespostaDesafioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -31,21 +29,20 @@ public class RespostaDesafioServiceImpl implements RespostaDesafioService {
     }
 
     @Override
-    public RespostaDesafio save(Requisicao requisicao) {
-        final RespostaDesafio respostaDesafio = montaDesafioResposta(requisicao);
+    public RespostaDesafio save(final RequisicaoDTO requisicaoDTO) {
+        final var respostaDesafio = montaDesafioResposta(requisicaoDTO);
         return respostaDesafioRepository.save(respostaDesafio);
     }
 
-    private RespostaDesafio montaDesafioResposta(Requisicao requisicao) {
-        RespostaDesafio respostaDesafio = new RespostaDesafio();
-        String palavra = requisicao.getPalavra();
+    private RespostaDesafio montaDesafioResposta(final RequisicaoDTO requisicaoDTO) {
+        final var respostaDesafio = new RespostaDesafio();
+        final var palavra = requisicaoDTO.getPalavra();
         try {
-            Optional<Character> vogal = recuperaVogal.
-                                        recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(palavra);
-            String tempoProcessamento = recuperaVogal.getTempoProcessamento();
+            final var vogal = recuperaVogal.recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal(palavra);
+            final var tempoProcessamento = recuperaVogal.getTempoProcessamento();
             respostaDesafio.setVogal(vogal.get());
             respostaDesafio.setTempoTotal(tempoProcessamento);
-        } catch (RecuperaVogalException e) {
+        } catch (final RecuperaVogalException e) {
             respostaDesafio.setMessagem("Não foi possivel recuperar vogal com as regras pedidas (:");
         }
         respostaDesafio.setPalavra(palavra);
