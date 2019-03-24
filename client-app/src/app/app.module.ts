@@ -5,11 +5,14 @@ import { RespostaDesafioService } from './service/resposta-desafio.service';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RespostaDesafioComponent } from './resposta-desafio/resposta-desafio.component';
+import { FooterComponent } from './ui/footer/footer.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    RespostaDesafioComponent
+    RespostaDesafioComponent,
+    FooterComponent
   ],
   imports: [
     HttpClientModule,

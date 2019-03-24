@@ -10,15 +10,16 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   templateUrl: './resposta-desafio.component.html',
   styleUrls: ['./resposta-desafio.component.css']
 })
+
 export class RespostaDesafioComponent implements OnInit {
 
-  private title: String;
-  private requisicao: Requisicao = new Requisicao();
-  private respostaDesafio: RespostaDesafio;
-  private form: FormGroup;
-  private isShowTable = false;
-  private apenasLetrasPatterns = new RegExp('^[a-zA-Z]+$');
+  public title: String;
+  public isShowTable = false;
+  public form: FormGroup;
+  public requisicao: Requisicao = new Requisicao();
 
+  private respostaDesafio: RespostaDesafio;
+  private apenasLetrasPatterns = new RegExp('^[a-zA-Z]+$');
 
   constructor(private repostaDesafioService: RespostaDesafioService,
               private fb: FormBuilder) { }
@@ -53,10 +54,6 @@ export class RespostaDesafioComponent implements OnInit {
     } else {
       this.isShowTable = true;
     }
-  }
-
-  private MACAddressInput(e: KeyboardEvent): void {
-    // UtilsForms.permitirApenasLetras(e);
   }
 
 }

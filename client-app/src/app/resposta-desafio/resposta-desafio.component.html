@@ -8,8 +8,7 @@
                 <div class="form-group">
                     <label class="sr-only">Name</label>
                     <input type="text" [(ngModel)]="requisicao.palavra"class="form-control" 
-                           placeholder="Palavra" required formControlName="palavra" 
-                           (keydown)="MACAddressInput($event)">
+                           placeholder="Palavra" required formControlName="palavra">
                     <div *ngIf="(form.controls['palavra'].dirty || form.controls['palavra'].touched) 
                                 && form.controls['palavra'].invalid" class="error-msg">
                         <div *ngIf="form.controls['palavra'].errors.required">
@@ -21,7 +20,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf=" isShowTable">
+                <div class="form-group" *ngIf="isShowTable">
                     <table class="table table-sm table-light">
                         <thead class="table-light">
                             <th scope="col">Vogal</th>
@@ -37,7 +36,8 @@
                 </div>
                   
                 <button (click)="recuperaPrimeiraVogalAposCosoanteNaoRepetidaAntecedidaPorVogal()" 
-                        class="btn btn-success" [disabled]="form.invalid">Enviar!
+                         class="btn btn-success" [disabled]="form.invalid">
+                         <span class="icon-play icon-large"></span> Enviar
                 </button>
               </form>
           </div>

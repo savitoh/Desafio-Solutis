@@ -1,6 +1,10 @@
 html,
-body{
+body {
+ position: relative;
  height: 100%;
+ font: 400 1em/1.4 Open Sans,sans-serif;
+ text-rendering: optimizeLegibility;
+ color: #7d7d7d
 }
 
 #app {
@@ -14,10 +18,4 @@ body{
 
 #app-caption {
   width: 100%;
-}
-
-.error-msg {
-  color: red;
-  display: block;
-  bottom: -4em;
 }
