@@ -29,6 +29,7 @@
     "core-js": "^2.5.4",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "ng4-loading-spinner": "^1.2.3",
     "popper.js": "^1.14.7",
     "rxjs": "6.0.0",
     "zone.js": "^0.8.26"

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RespostaDesafioComponent } from './resposta-desafio/resposta-desafio.component';
 import { FooterComponent } from './ui/footer/footer.component';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FooterComponent } from './ui/footer/footer.component';
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [RespostaDesafioService],
   bootstrap: [AppComponent]
